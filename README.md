@@ -28,10 +28,6 @@ Follow the checklist below when running the project from the VS Code **PowerShel
    - Install [ffmpeg](https://ffmpeg.org/download.html) (required for concatenation). An easy option is `winget install --id=Gyan.FFmpeg` or `choco install ffmpeg` if you already use Chocolatey.
 2. **Open the project in VS Code and launch a terminal.**
    - Use <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>`</kbd> to open a new integrated terminal (PowerShell by default).
-   - Ensure the terminal is rooted at the repository folder (the one containing `README.md`):
-     ```powershell
-     Set-Location C:\path\to\Reel-From-DM
-     ```
    - Confirm Python is available: `python --version` should print the interpreter version.
 3. **Create and activate a virtual environment.**
    ```powershell
@@ -42,11 +38,10 @@ Follow the checklist below when running the project from the VS Code **PowerShel
    ```powershell
    Set-ExecutionPolicy -Scope Process RemoteSigned
    ```
-4. **Install the project (adds it to the environment path) and dependencies.**
+4. **Install project dependencies.**
    ```powershell
    pip install --upgrade pip
    pip install -r requirements.txt
-   pip install -e .
    ```
 5. **Configure credentials and paths.** Either export them inline for the session or create a `.env` file:
    ```powershell

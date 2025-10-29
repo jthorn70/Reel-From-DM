@@ -3,23 +3,9 @@ from __future__ import annotations
 
 import argparse
 import logging
-import sys
-from pathlib import Path
 
-if __package__ in {None, ""}:  # pragma: no cover - runtime convenience for script execution
-    PACKAGE_ROOT = Path(__file__).resolve().parent
-    sys.path.insert(0, str(PACKAGE_ROOT.parent))
-    from reel_from_dm.config import (  # type: ignore  # pylint: disable=import-error
-        AgentOptions,
-        InstagramAuth,
-        dump_example_env,
-        load_env_files,
-        save_session_settings,
-    )
-    from reel_from_dm.reel_agent import ReelCompilationAgent  # type: ignore  # pylint: disable=import-error
-else:  # pragma: no cover - exercised when run as a module
-    from .config import AgentOptions, InstagramAuth, dump_example_env, load_env_files, save_session_settings
-    from .reel_agent import ReelCompilationAgent
+from .config import AgentOptions, InstagramAuth, dump_example_env, load_env_files, save_session_settings
+from .reel_agent import ReelCompilationAgent
 
 LOGGER = logging.getLogger(__name__)
 
