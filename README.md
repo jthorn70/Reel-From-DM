@@ -19,6 +19,49 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
+### Windows setup with Visual Studio Code
+
+Follow the checklist below when running the project from the VS Code **PowerShell** terminal on Windows:
+
+1. **Install prerequisites.**
+   - Install [Python 3.11+](https://www.python.org/downloads/windows/) and ensure the *Add python.exe to PATH* checkbox is selected during setup.
+   - Install [ffmpeg](https://ffmpeg.org/download.html) (required for concatenation). An easy option is `winget install --id=Gyan.FFmpeg` or `choco install ffmpeg` if you already use Chocolatey.
+2. **Open the project in VS Code and launch a terminal.**
+   - Use <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>`</kbd> to open a new integrated terminal (PowerShell by default).
+   - Confirm Python is available: `python --version` should print the interpreter version.
+3. **Create and activate a virtual environment.**
+   ```powershell
+   python -m venv .venv
+   .\.venv\Scripts\Activate.ps1
+   ```
+   If PowerShell blocks script execution, enable it for the current session first:
+   ```powershell
+   Set-ExecutionPolicy -Scope Process RemoteSigned
+   ```
+4. **Install project dependencies.**
+   ```powershell
+   pip install --upgrade pip
+   pip install -r requirements.txt
+   ```
+5. **Configure credentials and paths.** Either export them inline for the session or create a `.env` file:
+   ```powershell
+   $env:INSTAGRAM_USERNAME = "your_username"
+   $env:INSTAGRAM_PASSWORD = "your_password"
+   $env:DOWNLOAD_DIR = "C:\\path\\to\\downloads"   # optional override
+   $env:OUTPUT_PATH = "C:\\path\\to\\reel_compilation.mp4"  # optional override
+   ```
+   You can generate a `.env` template with:
+   ```powershell
+   python -m reel_from_dm.cli --dump-env > .env
+   ```
+6. **Run the agent.**
+   ```powershell
+   python -m reel_from_dm.cli -v --env .env
+   ```
+   The CLI logs progress to the terminal and produces the concatenated video at `OUTPUT_PATH` when it finishes.
+
+> 💡 Tip: To rerun the workflow later, reopen VS Code, run `.\.venv\Scripts\Activate.ps1`, and repeat steps 5–6.
+
 ## Configuration
 
 The agent reads its configuration from environment variables. The most important ones are:
